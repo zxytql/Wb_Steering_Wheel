@@ -1,0 +1,292 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.47138438035536273 -0.7927791372416486 -0.3863910008157254 1.6198202948096645
+  position -0.8064208740090185 1.1659458552452293 0.11467191369981503
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+}
+Robot {
+  translation 0 0.14 0
+  children [
+    DEF RF_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.2 0 0.2
+      }
+      device [
+        RotationalMotor {
+          name "rf_dir_motor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.2 0 0.2
+        children [
+          DEF RF_RUN HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 0 1
+            }
+            device [
+              RotationalMotor {
+                name "rf_run_motor"
+              }
+            ]
+            endPoint Solid {
+              rotation 1 0 0 1.5708
+              children [
+                DEF DRI Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0.411765 0.647059
+                    metalness 0
+                    emissiveColorMap ImageTexture {
+                      url [
+                        "C:/Users/zxy/Pictures/Default.jpg"
+                      ]
+                    }
+                  }
+                  geometry Cylinder {
+                    height 0.03
+                    radius 0.06
+                  }
+                }
+              ]
+              boundingObject USE DRI
+              physics Physics {
+              }
+            }
+          }
+          DEF DIR Shape {
+            appearance PBRAppearance {
+              baseColor 1 0.976471 0.701961
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.03
+              radius 0.05
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE DIR
+        physics Physics {
+        }
+      }
+    }
+    DEF LF_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.2 0 -0.2
+      }
+      device [
+        RotationalMotor {
+          name "lf_dir_motor"
+        }
+      ]
+      endPoint Solid {
+        translation 0.2 0 -0.2
+        children [
+          DEF LF_RUN HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 0 1
+            }
+            device [
+              RotationalMotor {
+                name "lf_run_motor"
+              }
+            ]
+            endPoint Solid {
+              rotation 1 0 0 1.5708
+              children [
+                DEF DRI Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0.411765 0.647059
+                    metalness 0
+                    emissiveColorMap ImageTexture {
+                      url [
+                        "C:/Users/zxy/Pictures/Default.jpg"
+                      ]
+                    }
+                  }
+                  geometry Cylinder {
+                    height 0.03
+                    radius 0.06
+                  }
+                }
+              ]
+              boundingObject USE DRI
+              physics Physics {
+              }
+            }
+          }
+          DEF DIR Shape {
+            appearance PBRAppearance {
+              baseColor 1 0.976471 0.701961
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.03
+              radius 0.05
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE DIR
+        physics Physics {
+        }
+      }
+    }
+    DEF LB_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.2 0 -0.2
+      }
+      device [
+        RotationalMotor {
+          name "lb_dir_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.2 0 -0.2
+        children [
+          DEF LB_RUN HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 0 1
+            }
+            device [
+              RotationalMotor {
+                name "lb_run_motor"
+              }
+            ]
+            endPoint Solid {
+              rotation 1 0 0 1.5708
+              children [
+                DEF DRI Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0.411765 0.647059
+                    metalness 0
+                    emissiveColorMap ImageTexture {
+                      url [
+                        "C:/Users/zxy/Pictures/Default.jpg"
+                      ]
+                    }
+                  }
+                  geometry Cylinder {
+                    height 0.03
+                    radius 0.06
+                  }
+                }
+              ]
+              boundingObject USE DRI
+              physics Physics {
+              }
+            }
+          }
+          DEF DIR Shape {
+            appearance PBRAppearance {
+              baseColor 1 0.976471 0.701961
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.03
+              radius 0.05
+            }
+          }
+        ]
+        name "solid(4)"
+        boundingObject USE DIR
+        physics Physics {
+        }
+      }
+    }
+    DEF RB_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.2 0 0.2
+      }
+      device [
+        RotationalMotor {
+          name "rb_dir_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.2 0 0.2
+        children [
+          DEF RB_RUN HingeJoint {
+            jointParameters HingeJointParameters {
+              axis 0 0 1
+            }
+            device [
+              RotationalMotor {
+                name "rb_run_motor"
+              }
+            ]
+            endPoint Solid {
+              rotation 1 0 0 1.5708
+              children [
+                DEF DRI Shape {
+                  appearance PBRAppearance {
+                    baseColor 1 0.411765 0.647059
+                    metalness 0
+                    emissiveColorMap ImageTexture {
+                      url [
+                        "C:/Users/zxy/Pictures/Default.jpg"
+                      ]
+                    }
+                  }
+                  geometry Cylinder {
+                    height 0.03
+                    radius 0.06
+                  }
+                }
+              ]
+              boundingObject USE DRI
+              physics Physics {
+              }
+            }
+          }
+          DEF DIR Shape {
+            appearance PBRAppearance {
+              baseColor 1 0.976471 0.701961
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.03
+              radius 0.05
+            }
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE DIR
+        physics Physics {
+        }
+      }
+    }
+    DEF BODY Solid {
+      children [
+        DEF BODY Shape {
+          appearance PBRAppearance {
+            baseColor 0.454902 0.552941 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.4 0.04 0.4
+          }
+        }
+      ]
+      boundingObject USE BODY
+      physics Physics {
+      }
+    }
+  ]
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "my_controller"
+}
