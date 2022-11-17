@@ -35,6 +35,8 @@
     "**/.vscode/**"
   ],
   "files.associations": {
-    "math.h": "c"
+    "math.h": "c",
+    "keyboard.h": "c",
+    "stdint.h": "c"
   }
 }
