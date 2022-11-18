@@ -37,6 +37,8 @@
   "files.associations": {
     "math.h": "c",
     "keyboard.h": "c",
-    "stdint.h": "c"
+    "stdint.h": "c",
+    "chassis.h": "c",
+    "robot.h": "c"
   }
 }

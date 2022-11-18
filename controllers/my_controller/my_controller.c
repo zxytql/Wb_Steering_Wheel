@@ -17,7 +17,8 @@
 #include <stdio.h>
 #include <webots/gps.h>
 #include <webots/inertial_unit.h>
-//#include "chassis.h"
+#include "main.h"
+#include "chassis.h"
 
 /*
  * You may want to add macros here.
@@ -25,6 +26,7 @@
 #define TIME_STEP 32
 
 
+robot_sensor_data_t robot_sensor_data;
 /*
  * This is the main program.
  * The arguments of the main function can be specified by the
@@ -35,6 +37,10 @@ int main(int argc, char **argv)
   /* necessary to initialize webots stuff */
   wb_robot_init();
   wb_keyboard_enable(TIME_STEP);
+  if (Helm_Chassis_Init() != 1)
+  {
+    /* code */
+  }
   
   /*
    * You should declare here WbDeviceTag variables for storing
@@ -79,6 +85,10 @@ int main(int argc, char **argv)
   WbDeviceTag imu = wb_robot_get_device("imu");
   wb_inertial_unit_enable(imu,TIME_STEP);
 
+  float vx = 0;
+  float vy = 0;
+  float wz = 0;
+
   /* main loop
    * Perform simulation steps of TIME_STEP milliseconds
    * and leave the loop when the simulation is over
@@ -90,49 +100,66 @@ int main(int argc, char **argv)
      * Enter here functions to read sensor data, like:
      *  double val = wb_distance_sensor_get_value(my_sensor);
      */
-    // static int now_key;
-    // now_key = wb_keyboard_get_key();
+    static int now_key;
+    now_key = wb_keyboard_get_key();
 
-    // /*  W = 87; A = 65; S = 83; D = 68; Q = 81; E = 69;*/
-    // while (now_key > 0)
-    // {
-    //   //printf("%d \n", now_key);
-    //   switch (now_key)
-    //   {
-    //   case 87:
-    //     /* code */
-    //     break;
-      
-    //   default:
-    //     break;
-    //   }
-    //   now_key = wb_keyboard_get_key();
-    // }
+    /*  W = 87; A = 65; S = 83; D = 68; Q = 81; E = 69;*/
+    while (now_key > 0)
+    {
+      //printf("%d \n", now_key);
+      switch (now_key)
+      {
+      case 87:
+        vx -= 0.5;
+        break;
+      case 65:
+        vy -= 0.5;
+        break;
+      case 83:
+        vx += 0.5;
+        break;
+      case 68:
+        vy += 0.5;
+        break;
+      case 81:
+        wz += 25;
+        break;
+      case 69:
+        wz -= 25;
+        break;
+        
+      default:
+        break;
+      }
+      now_key = wb_keyboard_get_key();
+    }
     
     /* 获取机器人当前全局坐标 */
-    static const double *gps_value;
-    gps_value = wb_gps_get_values(gps);
+    robot_sensor_data.gps_value = wb_gps_get_values(gps);
     /* Process sensor data here */
     //printf("x = %f, y = %f, z = %f \n",gps_value[0],gps_value[1], gps_value[2]);
 
     /* 获取机器人当前航向角 */
-    static const double *imu_value;
-    imu_value = wb_inertial_unit_get_roll_pitch_yaw(imu);
+    robot_sensor_data.imu_value = wb_inertial_unit_get_roll_pitch_yaw(imu);
     //printf("yaw = %f \n",imu_value[2]);
-    printf("x = %f, y = %f, z = %f, yaw = %f \n",gps_value[0],gps_value[1], gps_value[2], imu_value[2]);
+    printf("x = %f, y = %f, z = %f, yaw = %f \n",robot_sensor_data.gps_value[0],robot_sensor_data.gps_value[1], robot_sensor_data.gps_value[2], robot_sensor_data.imu_value[2]);
+    
     /*
      * Enter here functions to send actuator commands, like:
      * wb_motor_set_position(my_actuator, 10.0);
      */
-    wb_motor_set_velocity(rf_run_motor, -2.0f);
-    wb_motor_set_velocity(lf_run_motor, -2.0f);
-    wb_motor_set_velocity(lb_run_motor, 2.0f);
-    wb_motor_set_velocity(rb_run_motor, 2.0f);
+    Helm_Chassis_Ctrl(vx, vy, wz, &helm_chassis, &robot_sensor_data);
+    printf("dir = %f, test = %d \n", helm_chassis.dir_chassis,helm_chassis.chassis_cor);
+    wb_motor_set_velocity(lf_run_motor, helm_chassis.wheel1.v_target);
+    wb_motor_set_velocity(lb_run_motor, helm_chassis.wheel2.v_target);
+    wb_motor_set_velocity(rb_run_motor, helm_chassis.wheel3.v_target);
+    wb_motor_set_velocity(rf_run_motor, helm_chassis.wheel4.v_target);
 
-    wb_motor_set_position(rf_dir_motor, M_PI_4);
-    wb_motor_set_position(lf_dir_motor, M_PI_4 * 3);
-    wb_motor_set_position(lb_dir_motor, M_PI_4);
-    wb_motor_set_position(rb_dir_motor, M_PI_4 * 3);
+    wb_motor_set_position(lf_dir_motor, ANGLE2RAD(helm_chassis.wheel1.angle_target));
+    wb_motor_set_position(lb_dir_motor, ANGLE2RAD(helm_chassis.wheel2.angle_target));
+    wb_motor_set_position(rb_dir_motor, ANGLE2RAD(helm_chassis.wheel3.angle_target));
+    wb_motor_set_position(rf_dir_motor, ANGLE2RAD(helm_chassis.wheel4.angle_target));
+
   };
 
   /* Enter your cleanup code here */

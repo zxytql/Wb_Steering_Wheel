@@ -2,6 +2,13 @@
 #define _CHASSIS_H
 
 #include <webots/motor.h>
+#include <webots/robot.h>
+#include "main.h"
+
+#define ANGLE2RAD(x) (x / 180.0f * M_PI)
+#define RAD2ANGLE(x) (x / M_PI * 180.0f)
+
+#define DIS_WHEEL2CENTER 0.282842712474619
 
 typedef struct
 {
@@ -52,6 +59,9 @@ extern helm_chassis_t helm_chassis;
 /* Function */
 void Chassis_Wb_Init(void);
 void Chassis_Self_Spin(void);
-uint16_t Helm_Chassis_Init(void);
-void Helm_Chassis_Ctrl(float, float, float, helm_chassis_t*);
+int Helm_Chassis_Init(void);
+void Helm_Chassis_Ctrl(float vx_input, float vy_input, float wz_input, helm_chassis_t *chassis, robot_sensor_data_t *);
+void Helm_Wheel_Ctrl(float vx, float vy, float wz, helm_wheel_t *wheel_ptr);
+void Angle_Limit(float *);
+void V_Dir2Wheel_Angle(helm_wheel_t *, float);
 #endif
