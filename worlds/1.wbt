@@ -1,0 +1,276 @@
+#VRML_SIM R2022b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.10598843883822212 0.9561721419434961 0.27294923667932 0.7715465982888329
+  position -1.8025459653389186 -0.4522959055480823 1.944519600749913
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 10 10
+}
+Robot {
+  translation 0 0 0.17
+  children [
+    GPS {
+    }
+    InertialUnit {
+      name "imu"
+    }
+    DEF BODY Solid {
+      children [
+        DEF LF_WHEEL HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 0 1
+            anchor -0.2 0.2 0
+          }
+          device [
+            RotationalMotor {
+              name "lf_dir_motor"
+              maxVelocity 100
+            }
+          ]
+          endPoint Solid {
+            translation -0.2 0.2 0
+            children [
+              HingeJoint {
+                jointParameters HingeJointParameters {
+                }
+                device [
+                  RotationalMotor {
+                    name "lf_run_motor"
+                    maxVelocity 100
+                  }
+                ]
+                endPoint DEF RUN Solid {
+                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  children [
+                    DEF RUN Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.941176 1 0.67451
+                      }
+                      geometry Cylinder {
+                        height 0.03
+                        radius 0.06
+                      }
+                    }
+                  ]
+                  boundingObject USE RUN
+                  physics Physics {
+                  }
+                }
+              }
+              DEF DIR Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(1)"
+            boundingObject USE DIR
+            physics Physics {
+            }
+          }
+        }
+        DEF LB_WHEEL HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 0 1
+            anchor -0.2 -0.2 0
+          }
+          device [
+            RotationalMotor {
+              name "lb_dir_motor"
+              maxVelocity 100
+            }
+          ]
+          endPoint Solid {
+            translation -0.2 -0.2 0
+            children [
+              HingeJoint {
+                jointParameters HingeJointParameters {
+                }
+                device [
+                  RotationalMotor {
+                    name "lb_run_motor"
+                    maxVelocity 100
+                  }
+                ]
+                endPoint DEF RUN Solid {
+                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  children [
+                    DEF RUN Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.941176 1 0.67451
+                      }
+                      geometry Cylinder {
+                        height 0.03
+                        radius 0.06
+                      }
+                    }
+                  ]
+                  boundingObject USE RUN
+                  physics Physics {
+                  }
+                }
+              }
+              DEF DIR Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(2)"
+            boundingObject USE DIR
+            physics Physics {
+            }
+          }
+        }
+        DEF RB_WHEEL HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 0 1
+            anchor 0.2 -0.2 0
+          }
+          device [
+            RotationalMotor {
+              name "rb_dir_motor"
+              maxVelocity 100
+            }
+          ]
+          endPoint Solid {
+            translation 0.2 -0.2 0
+            children [
+              HingeJoint {
+                jointParameters HingeJointParameters {
+                }
+                device [
+                  RotationalMotor {
+                    name "rb_run_motor"
+                    maxVelocity 100
+                  }
+                ]
+                endPoint DEF RUN Solid {
+                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  children [
+                    DEF RUN Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.941176 1 0.67451
+                      }
+                      geometry Cylinder {
+                        height 0.03
+                        radius 0.06
+                      }
+                    }
+                  ]
+                  boundingObject USE RUN
+                  physics Physics {
+                  }
+                }
+              }
+              DEF DIR Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(3)"
+            boundingObject USE DIR
+            physics Physics {
+            }
+          }
+        }
+        DEF RF_WHEEL HingeJoint {
+          jointParameters HingeJointParameters {
+            axis 0 0 1
+            anchor 0.2 0.2 0
+          }
+          device [
+            RotationalMotor {
+              name "rf_dir_motor"
+              maxVelocity 100
+            }
+          ]
+          endPoint Solid {
+            translation 0.2 0.2 0
+            children [
+              HingeJoint {
+                jointParameters HingeJointParameters {
+                }
+                device [
+                  RotationalMotor {
+                    name "rf_run_motor"
+                    maxVelocity 100
+                  }
+                ]
+                endPoint DEF RUN Solid {
+                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  children [
+                    DEF RUN Shape {
+                      appearance PBRAppearance {
+                        baseColor 0.941176 1 0.67451
+                      }
+                      geometry Cylinder {
+                        height 0.03
+                        radius 0.06
+                      }
+                    }
+                  ]
+                  boundingObject USE RUN
+                  physics Physics {
+                  }
+                }
+              }
+              DEF DIR Shape {
+                appearance PBRAppearance {
+                }
+                geometry Cylinder {
+                  height 0.03
+                  radius 0.05
+                }
+              }
+            ]
+            name "solid(4)"
+            boundingObject USE DIR
+            physics Physics {
+            }
+          }
+        }
+        DEF BODY Shape {
+          appearance PBRAppearance {
+            emissiveColorMap ImageTexture {
+              url [
+                "../Arrow.png"
+              ]
+            }
+          }
+          geometry Box {
+            size 0.4 0.4 0.04
+          }
+        }
+      ]
+      boundingObject USE BODY
+      physics Physics {
+      }
+    }
+  ]
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "my_controller"
+}
