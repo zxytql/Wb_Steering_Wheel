@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "bspline.h": "c",
+        "calculate.h": "c",
+        "chassis.h": "c",
+        "gps_data.h": "c",
+        "main.h": "c"
+    }
+}

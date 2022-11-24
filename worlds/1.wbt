@@ -7,8 +7,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.10598843883822212 0.9561721419434961 0.27294923667932 0.7715465982888329
-  position -1.8025459653389186 -0.4522959055480823 1.944519600749913
+  orientation -0.15956630902710234 0.7293202744619963 0.6653048401162774 0.6354439948651652
+  position -1.4901219024821617 -0.6360240770581392 1.1039616099570735
 }
 TexturedBackground {
 }
@@ -17,7 +17,7 @@ TexturedBackgroundLight {
 RectangleArena {
   floorSize 10 10
 }
-Robot {
+DEF ROBOT Robot {
   translation 0 0 0.17
   children [
     GPS {
@@ -273,4 +273,5 @@ Robot {
   physics Physics {
   }
   controller "my_controller"
+  supervisor TRUE
 }

@@ -139,3 +139,13 @@ void Angle_Limit(float *angle)
 		Angle_Limit(angle);
 	}
 }
+
+// Pose_t Get_Pos_Present()
+// {
+// 	Pose_t pos;
+// 	pos.point.x = GetX();
+// 	pos.point.y = GetY();
+// 	pos.direction   = GetAngle();
+// 	pos.vel = sqrt(GetSpeedWithoutOmega().xVel*GetSpeedWithoutOmega().xVel + GetSpeedWithoutOmega().yVel*GetSpeedWithoutOmega().yVel);
+// 	return pos;	
+// }

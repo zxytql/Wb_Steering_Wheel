@@ -19,6 +19,7 @@
 #include <webots/inertial_unit.h>
 #include "main.h"
 #include "chassis.h"
+#include <webots/supervisor.h>
 
 /*
  * You may want to add macros here.
@@ -34,6 +35,7 @@ robot_sensor_data_t robot_sensor_data;
  */
 int main(int argc, char **argv)
 {
+  
   /* necessary to initialize webots stuff */
   wb_robot_init();
   wb_keyboard_enable(TIME_STEP);
@@ -41,7 +43,7 @@ int main(int argc, char **argv)
   {
     /* code */
   }
-  
+  const WbNodeRef Robot_root = wb_supervisor_node_get_from_def("ROBOT");
   /*
    * You should declare here WbDeviceTag variables for storing
    * robot devices like this:
@@ -100,6 +102,7 @@ int main(int argc, char **argv)
      * Enter here functions to read sensor data, like:
      *  double val = wb_distance_sensor_get_value(my_sensor);
      */
+    /* 键盘控制底盘 */
     static int now_key;
     now_key = wb_keyboard_get_key();
 
@@ -142,8 +145,10 @@ int main(int argc, char **argv)
     /* 获取机器人当前航向角 */
     robot_sensor_data.imu_value = wb_inertial_unit_get_roll_pitch_yaw(imu);
     //printf("yaw = %f \n",imu_value[2]);
-    printf("x = %f, y = %f, z = %f, yaw = %f \n",robot_sensor_data.gps_value[0],robot_sensor_data.gps_value[1], robot_sensor_data.gps_value[2], robot_sensor_data.imu_value[2]);
+    //printf("x = %f, y = %f, z = %f, yaw = %f \n",robot_sensor_data.gps_value[0],robot_sensor_data.gps_value[1], robot_sensor_data.gps_value[2], robot_sensor_data.imu_value[2]);
     
+    robot_sensor_data.velocity = wb_supervisor_node_get_velocity(Robot_root);
+    printf(" %f, %f, %f \n",robot_sensor_data.velocity[0],robot_sensor_data.velocity[1], robot_sensor_data.velocity[2]);
     /*
      * Enter here functions to send actuator commands, like:
      * wb_motor_set_position(my_actuator, 10.0);

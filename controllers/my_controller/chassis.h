@@ -4,9 +4,10 @@
 #include <webots/motor.h>
 #include <webots/robot.h>
 #include "main.h"
+#include "calculate.h"
 
-#define ANGLE2RAD(x) (x / 180.0f * M_PI)
-#define RAD2ANGLE(x) (x / M_PI * 180.0f)
+#define ANGLE2RAD(x) (x / 180.0f * M_PI) //角度转弧度
+#define RAD2ANGLE(x) (x / M_PI * 180.0f) //弧度转角度
 
 #define DIS_WHEEL2CENTER 0.282842712474619
 
@@ -41,6 +42,26 @@ typedef enum
 
 typedef struct
 {
+	//速度大小
+	float vel;
+	//速度方向
+	float direction;
+	//角速度大小
+	float omega;
+}robotVel_t;
+
+//点斜式结构体 ，斜率用角度制的角度代替
+typedef struct
+{
+	Point_t point;
+	//角度制
+	float   direction;
+	//速度
+	float vel;
+}Pose_t;
+
+typedef struct
+{
     chassis_ct_t chassis_ct;
     chassis_fdb_ct_t chassis_fdb_ct;
     helm_wheel_t wheel1;
@@ -64,4 +85,6 @@ void Helm_Chassis_Ctrl(float vx_input, float vy_input, float wz_input, helm_chas
 void Helm_Wheel_Ctrl(float vx, float vy, float wz, helm_wheel_t *wheel_ptr);
 void Angle_Limit(float *);
 void V_Dir2Wheel_Angle(helm_wheel_t *, float);
+Pose_t Get_Pos_Present();
+
 #endif

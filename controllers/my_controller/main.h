@@ -5,6 +5,7 @@ typedef struct
 {
     const double *gps_value;
     const double *imu_value;
+    const double *velocity;
 }robot_sensor_data_t;
 
 extern robot_sensor_data_t robot_sensor_data;
