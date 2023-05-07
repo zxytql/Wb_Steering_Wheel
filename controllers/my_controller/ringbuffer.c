@@ -16,7 +16,7 @@
 #include <stdint.h>
 #include "calculate.h"
 #include "math.h"
-
+#include "chassis.h"
 #include <unistd.h>
 #include <stdio.h>
 
@@ -308,71 +308,71 @@ int dotNumPresent(void)
 }
 
 //传入点信息，进行规划。并放入缓存池
-// int InputPoints2RingBuffer(Pose_t *points,int num)
-// {
-// 	int n = 0;
-// 	//将传入的点绘制为B样条，分成15cm一段
-// 	n = BspSegment(num,points,GetRingBufferAdress());
-// 	//dotNumAcquire(n);
-// 	//记录填入的关键点个数
-// 	SetUpPointer(n);
-// 	//对第一点做处理 设置第一点的据起点长度为0
-// 	SetRingBufferPointLen(1,0.0f);
+int InputPoints2RingBuffer(Pose_t *points,int num)
+{
+	int n = 0;
+	//将传入的点绘制为B样条，分成15cm一段
+	n = BspSegment(num,points,GetRingBufferAdress());
+	//dotNumAcquire(n);
+	//记录填入的关键点个数
+	SetUpPointer(n);
+	//对第一点做处理 设置第一点的据起点长度为0
+	SetRingBufferPointLen(1,0.0f);
 	
-// 	for(int i = 1;i < n;i++)
-// 	{
-// //		int sub =0.0f;
-// 		//求出本段曲线的曲线长度
-// 		float tempLenth = CaculateBsplineLen(GetRingBufferPoint(i),GetRingBufferPoint(i + 1),GetRingBufferPointAngle(i),GetRingBufferPointAngle(i+1));
-// 		//设置该点距离起点路径长度
-// 		SetRingBufferPointLen(i+1 ,GetLength() + tempLenth);
-// 		//设置总长度
-// 		SetLength(GetLength() + tempLenth);
-// 		//曲率半径 R = L / θ 
-// 		float curvatureR = 0.0f;
-// 		if(fabs(CalculateAngleSub(GetRingBufferPointAngle(i+1),GetRingBufferPointAngle(i))) < 0.01f)
-// 		{
-// 			//直线的曲率半径
-// 		  curvatureR = fabs(tempLenth)/0.0001f;
-// 		}
-// 		else
-// 		{
-// 			//曲线的曲率半径
-// 			curvatureR = fabs(tempLenth/((CalculateAngleSub(GetRingBufferPointAngle(i+1),GetRingBufferPointAngle(i)))*CHANGE_TO_RADIAN));
-// 		}
-// 		//设置该点曲率半径
-// 		SetRingBufferAverCurvature(i,curvatureR);
-// 	}
+	for(int i = 1;i < n;i++)
+	{
+//		int sub =0.0f;
+		//求出本段曲线的曲线长度
+		float tempLenth = CaculateBsplineLen(GetRingBufferPoint(i),GetRingBufferPoint(i + 1),GetRingBufferPointAngle(i),GetRingBufferPointAngle(i+1));
+		//设置该点距离起点路径长度
+		SetRingBufferPointLen(i+1 ,GetLength() + tempLenth);
+		//设置总长度
+		SetLength(GetLength() + tempLenth);
+		//曲率半径 R = L / θ 
+		float curvatureR = 0.0f;
+		if(fabs(CalculateAngleSub(GetRingBufferPointAngle(i+1),GetRingBufferPointAngle(i))) < 0.01f)
+		{
+			//直线的曲率半径
+		  curvatureR = fabs(tempLenth)/0.0001f;
+		}
+		else
+		{
+			//曲线的曲率半径
+			curvatureR = fabs(tempLenth/((CalculateAngleSub(GetRingBufferPointAngle(i+1),GetRingBufferPointAngle(i)))*CHANGE_TO_RADIAN));
+		}
+		//设置该点曲率半径
+		SetRingBufferAverCurvature(i,curvatureR);
+	}
 
 	
-// 	//将存入的数据规划速度
-// 	SpeedPlaning();
-// 	//清除机器人行走路径长度
-// 	ClearPathLen();
+	//将存入的数据规划速度
+	SpeedPlaning();
+	//清除机器人行走路径长度
+	ClearPathLen();
 	
-// 	#define SEND 1
-// 	if(SEND)
-// 	{
-// 		usleep(1000);
-// 		for (int i = 0; i < n; i++)
-// 		{
-// 			usleep(500);
+	#define SEND 1
+	if(SEND)
+	{
+		usleep(1000);
+		for (int i = 0; i < n; i++)
+		{
+			usleep(500);
 
-// 			fprintf(fpWrite,"PL %d %d ",(int)ringBuffer[i].point.x,(int)ringBuffer[i].point.y);
-// 			fprintf(fpWrite,"%d %d ",(int)ringBuffer[i].angle*10,(int)(ringBuffer[i].poseAngle*10));	
-// 			fprintf(fpWrite,"%d %d ",(int)ringBuffer[i].curvatureR,(int)ringBuffer[i].length);
-// 			fprintf(fpWrite,"%d ",(int)ringBuffer[i].vellMax);
-// 			fprintf(fpWrite,"\n");
+			fprintf(fpWrite,"PL %d %d ",(int)ringBuffer[i].point.x,(int)ringBuffer[i].point.y);
+			fprintf(fpWrite,"%d %d ",(int)ringBuffer[i].angle*10,(int)(ringBuffer[i].poseAngle*10));	
+			fprintf(fpWrite,"%d %d ",(int)ringBuffer[i].curvatureR,(int)ringBuffer[i].length);
+			fprintf(fpWrite,"%d ",(int)ringBuffer[i].vellMax);
+			fprintf(fpWrite,"\n");
 
-// 		}
+		}
 
-// 		fprintf(fpWrite,"%d %d L %d ",(int)GetRingBufferPoint(n).x,(int)GetRingBufferPoint(n).y,(int)GetLength());
+		fprintf(fpWrite,"%d %d L %d ",(int)GetRingBufferPoint(n).x,(int)GetRingBufferPoint(n).y,(int)GetLength());
 
-// 		fprintf(fpWrite,"BingeNB\n");
+		fprintf(fpWrite,"BingeNB\n");
 
-// 	}
-// 	return 1;
-// }
+	}
+	return 1;
+}
 
 
 //计算预测路径时间

@@ -13,6 +13,7 @@
 #ifndef _CALCULATE_H
 #define _CALCULATE_H
 
+#include "chassis.h"
 
 //角度制转换为弧度制系数
 #define CHANGE_TO_RADIAN    (0.01745329251994f)   
@@ -26,6 +27,23 @@
 #ifndef NULL
 #define NULL 0
 #endif
+
+//点的结构体 单位mm
+typedef struct
+{
+	float x;
+	float y;
+}Point_t;
+
+//点斜式结构体 ，斜率用角度制的角度代替
+typedef struct
+{
+	Point_t point;
+	//角度制
+	float   direction;
+	//速度
+	float vel;
+}Pose_t;
 
 //三轮控制姿态参数
 typedef struct
@@ -50,12 +68,7 @@ typedef struct
 //KeyPointInf_t结构体中存放变量所占字节数大小，用于flash存数。
 #define BYTESNUM 7
 
-//点的结构体 单位mm
-typedef struct
-{
-	float x;
-	float y;
-}Point_t;
+
 
 typedef struct
 {

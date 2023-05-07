@@ -1,4 +1,4 @@
-#VRML_SIM R2022b utf8
+#VRML_SIM R2023a utf8
 
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
@@ -7,19 +7,23 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.15956630902710234 0.7293202744619963 0.6653048401162774 0.6354439948651652
-  position -1.4901219024821617 -0.6360240770581392 1.1039616099570735
+  orientation -0.11542148382373735 0.954043951312578 0.2765465965001381 0.8247978549398467
+  position -3.9139058936416653 -1.2078040174441602 4.248018094331417
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
-  floorSize 10 10
+  rotation 0 1 0 0
+  floorSize 100 100
 }
 DEF ROBOT Robot {
   translation 0 0 0.17
   children [
+    Pen {
+      inkDensity 1
+    }
     GPS {
     }
     InertialUnit {
@@ -51,7 +55,7 @@ DEF ROBOT Robot {
                   }
                 ]
                 endPoint DEF RUN Solid {
-                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  rotation 6.654085571711157e-11 -0.9999999999999999 -6.65407815023782e-11 1.5707953071795093
                   children [
                     DEF RUN Shape {
                       appearance PBRAppearance {
@@ -107,7 +111,7 @@ DEF ROBOT Robot {
                   }
                 ]
                 endPoint DEF RUN Solid {
-                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  rotation 6.652794765534581e-11 -0.9999999999999999 -6.652788020357783e-11 1.570795307179513
                   children [
                     DEF RUN Shape {
                       appearance PBRAppearance {
@@ -163,7 +167,7 @@ DEF ROBOT Robot {
                   }
                 ]
                 endPoint DEF RUN Solid {
-                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  rotation -6.65229699361185e-11 -0.9999999999999999 6.652289817016376e-11 1.5707953071795089
                   children [
                     DEF RUN Shape {
                       appearance PBRAppearance {
@@ -219,7 +223,7 @@ DEF ROBOT Robot {
                   }
                 ]
                 endPoint DEF RUN Solid {
-                  rotation 0 -0.9999999999999999 0 1.5707953071795862
+                  rotation -6.653252625390106e-11 -0.9999999999999999 6.653245902044782e-11 1.5707953071795062
                   children [
                     DEF RUN Shape {
                       appearance PBRAppearance {
@@ -272,6 +276,6 @@ DEF ROBOT Robot {
   boundingObject USE BODY
   physics Physics {
   }
-  controller "my_controller"
+  controller "PID_Track"
   supervisor TRUE
 }

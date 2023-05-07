@@ -3,13 +3,14 @@
 
 #include <webots/motor.h>
 #include <webots/robot.h>
-#include "main.h"
-#include "calculate.h"
+#include "bsp_imu.h"
+
+#define M_PI		3.14159265358979323846
 
 #define ANGLE2RAD(x) (x / 180.0f * M_PI) //角度转弧度
 #define RAD2ANGLE(x) (x / M_PI * 180.0f) //弧度转角度
 
-#define DIS_WHEEL2CENTER 0.282842712474619
+#define DIS_WHEEL2CENTER 0.56568542494923801952067548968388
 
 typedef struct
 {
@@ -73,7 +74,7 @@ extern helm_chassis_t helm_chassis;
 void Chassis_Wb_Init(void);
 void Chassis_Self_Spin(void);
 int Helm_Chassis_Init(void);
-void Helm_Chassis_Ctrl(float vx_input, float vy_input, float wz_input, helm_chassis_t *chassis, robot_sensor_data_t *);
+void Helm_Chassis_Ctrl(float vx_input, float vy_input, float wz_input, helm_chassis_t *chassis,  float yaw);
 void Helm_Wheel_Ctrl(float vx, float vy, float wz, helm_wheel_t *wheel_ptr);
 void Angle_Limit(float *);
 void V_Dir2Wheel_Angle(helm_wheel_t *, float);

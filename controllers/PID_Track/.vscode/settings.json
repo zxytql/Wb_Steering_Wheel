@@ -13,15 +13,14 @@
     "-Wshadow",
     "-Wformat=2",
     "-Wconversion",
-    "-Wnull-dereference"
+    "-Wnull-dereference",
+    "-Wsign-conversion"
   ],
   "C_Cpp_Runner.enableWarnings": true,
   "C_Cpp_Runner.warningsAsError": false,
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
-  "C_Cpp_Runner.includePaths": [
-    "D:/Webots/include/controller/c"
-  ],
+  "C_Cpp_Runner.includePaths": [],
   "C_Cpp_Runner.includeSearch": [
     "*",
     "**/*"
@@ -34,15 +33,13 @@
     "**/.vscode",
     "**/.vscode/**"
   ],
-  "files.associations": {
-    "math.h": "c",
-    "keyboard.h": "c",
-    "stdint.h": "c",
-    "chassis.h": "c",
-    "robot.h": "c",
-    "calculate.h": "c",
-    "main.h": "c"
-  },
   "C_Cpp_Runner.useAddressSanitizer": false,
-  "C_Cpp_Runner.showCompilationTime": false
+  "C_Cpp_Runner.showCompilationTime": false,
+  "files.associations": {
+    "inertial_unit.h": "c",
+    "bsp_imu.h": "c",
+    "fuzzy_pid.h": "c",
+    "chassis.h": "c",
+    "bsp_gps.h": "c"
+  }
 }

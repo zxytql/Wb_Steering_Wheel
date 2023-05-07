@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Webots_Project/Wb_Steering_Wheel/controllers/my_controller",
-      "program": "d:/Webots_Project/Wb_Steering_Wheel/controllers/my_controller/build/Debug/outDebug",
+      "cwd": "d:/Webots_Project/Wb_Steering_Wheel/controllers/PID_Track",
+      "program": "d:/Webots_Project/Wb_Steering_Wheel/controllers/PID_Track/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

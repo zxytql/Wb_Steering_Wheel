@@ -23,6 +23,11 @@ float Get_Now_Y(void)
     return robot_sensor_data.gps_value[1];
 }
 
+float Get_Now_Angle(void)
+{
+    return robot_sensor_data.imu_value[2];
+}
+
 void Cal_Walk_Length(void)
 {
     float err = -0.02f;
@@ -80,3 +85,39 @@ float Get_Walk_Path_Length(void)
 {
     return walk_length;
 }
+
+float Get_Speed_X(void)
+{
+    return robot_sensor_data.velocity[0];
+}
+
+float Get_Speed_Y(void)
+{
+    return robot_sensor_data.velocity[1];
+}
+
+void Add_Path_Length(float dis)
+{
+    walk_length += dis;
+}
+
+void Reduce_Path_Length(float dis)
+{
+    walk_length -= dis;
+}
+
+float Get_AngularSpeed_W(void)
+{
+    return robot_sensor_data.velocity[5];
+    
+}
+Pose_t Get_Pos_Present()
+{
+    Pose_t pos;
+    pos.point.x = Get_Now_X();
+    pos.point.y = Get_Now_Y();
+    pos.direction = Get_Now_Angle();
+    pos.vel = sqrt(Get_Speed_X() * Get_Speed_X() + Get_Speed_Y() * Get_Speed_Y());
+    return pos;
+}
+

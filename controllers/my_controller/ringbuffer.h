@@ -2,6 +2,7 @@
 #define _RINGBUFFER_H
 
 #include <stdint.h>
+#include "calculate.h"
 
 /*********************************************************************
 * @name 		addring

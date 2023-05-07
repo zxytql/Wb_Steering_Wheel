@@ -13,6 +13,7 @@
 #include "math.h"
 #include "calculate.h"
 #include <stdlib.h>
+#include "chassis.h"
 
 //对一个值进行限幅
 void ValueClamp(float *value , float max , float min)
