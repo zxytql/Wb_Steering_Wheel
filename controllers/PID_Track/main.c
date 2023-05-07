@@ -79,6 +79,9 @@ int main(int argc, char **argv) {
   float vy = 0;
   float wz = 0;
   vel_t vel;
+
+  FILE *fp;
+  fp = fopen("data.txt","w");
   // float kp = 0.1f;
   // float ki = 0.003f;
   // float kd = 0.21f;
@@ -123,16 +126,22 @@ int main(int argc, char **argv) {
     // vx = fuzzypid_cal(&track_x_pid,Get_SPVS_X_Vel() * 1000.0f, 15.0f * 1000.0f, Get_GPS_X_ms());
     // vy = fuzzypid_cal(&track_y_pid,Get_SPVS_Y_Vel() * 1000.0f, 15.0f * 1000.0f, Get_GPS_Y_ms());
     // printf("output = %f \n",-vy);
-    vel = PID_Nav_Func(&pid_nav, &fzy_pid_x, &fzy_pid_y, path_1);
+
+    //vel = PID_Nav_Func(&pid_nav, &fzy_pid_x, &fzy_pid_y, path_1);
+    PID_Nav_Point_Handler(&pid_nav,path_1);
+    vel = PID_Nav_Point_Tracker(&pid_nav, &fzy_pid_x, &fzy_pid_y, path_1);
+    vx = vel.vx;    
+    vy = vel.vy;
+    wz = vel.ang_w;
+
+    fprintf(fp, "%f, %f \n",Get_GPS_X(),Get_GPS_Y());
+    
     printf("Now_index = %d \n",pid_nav.point_index);
     printf("Now_x = %f, Now_y = %f \n",Get_GPS_X_mm(),Get_GPS_Y_mm());
     printf("vx = %f, vy = %f\n",-vx,-vy);
 
-    //TO-DO
-    //2023.5.6 对于单个点的跟踪没有问题 目前没有做速度规划（即max_plan_v） 导致在跟踪离散点时顿挫感非常严重 速度规划应该是在规划速度上做速度的增减量控制 
-    
-    vx = vel.vx;    
-    vy = vel.vy;
+
+
     //-------------------------
 
     /*
@@ -157,6 +166,6 @@ int main(int argc, char **argv) {
 
   /* This is necessary to cleanup webots resources */
   wb_robot_cleanup();
-
+  fclose(fp);
   return 0;
 }

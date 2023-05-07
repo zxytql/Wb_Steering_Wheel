@@ -18,6 +18,16 @@ const double Get_SPVS_Y_Vel()
     return wb_spvs_data.node_vel[1];
 }
 
+const double Get_SPVS_X_Vel_mm()
+{
+    return wb_spvs_data.node_vel[0] * 1000.0f;
+}
+
+const double Get_SPVS_Y_Vel_mm()
+{
+    return wb_spvs_data.node_vel[1] * 1000.0f;
+}
+
 const double Get_SPVS_Z_Angular_Vel()
 {
     return wb_spvs_data.node_vel[5];

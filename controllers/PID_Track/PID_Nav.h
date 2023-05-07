@@ -7,6 +7,7 @@
 
 #define NAV_PATH_DONE (10)
 #define NAV_PATH_NOT_DONE (11)
+#define NAV_TRACK_FINAL (12)
 
 #define TRACK_POINT_DONE (20)
 #define TRACK_POINT_NOT_DONE (21)
@@ -16,6 +17,9 @@ typedef struct
     float x_set;
     float y_set;
     float theta_set;
+
+    float v_set;
+    float v_plan;
 
     float tgt_theta;
     float now_theta;
@@ -54,4 +58,10 @@ extern fzy_pid_t fzy_pid_x;
 extern fzy_pid_t fzy_pid_y;
 vel_t PID_Nav_Func(pid_nav_t *pid_nav, fzy_pid_t *fzy_ptr, fzy_pid_t *fzy_ptr2, path_t *path);
 void PID_Nav_Init(pid_nav_t *pid_nav, fzy_pid_t *fzy_ptr1, fzy_pid_t *fzy_ptr2);
+vel_t PID_Nav_Final_Track(pid_nav_t *pid_nav, fzy_pid_t *fzy_ptr, fzy_pid_t *fzy_ptr2, path_t *path);
+
+void PID_Nav_Point_Handler(pid_nav_t *pid_nav, path_t *path);
+vel_t PID_Nav_Point_Tracker(pid_nav_t *pid_nav, fzy_pid_t *fzy_ptr1, fzy_pid_t *fzy_ptr2, path_t *path);
+
+float Navigation_Angle_Ctrl(float anglePresent,float angleTarget,float kp,float kd);
 #endif

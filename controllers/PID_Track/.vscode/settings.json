@@ -40,6 +40,9 @@
     "bsp_imu.h": "c",
     "fuzzy_pid.h": "c",
     "chassis.h": "c",
-    "bsp_gps.h": "c"
+    "bsp_gps.h": "c",
+    "pid_nav.h": "c",
+    "path.h": "c",
+    "bsp_spvs.h": "c"
   }
 }
